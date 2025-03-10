@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Arrays</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Python</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="2_Basics.html">Basics</a>
+</li>
+<li>
+  <a href="index.html#3_Arrays_Vectors.html">Arrays/Vectors</a>
+</li>
+<li>
+  <a href="index.html#4_Regex.html">Regex</a>
+</li>
+<li>
+  <a href="index.html#6_Data_Analysis_Py.html">Data Analysis</a>
+</li>
+<li>
+  <a href="index.html#7_Best_practices.html">Best Pratices</a>
+</li>
+<li>
+  <a href="index.html#8_Efficient_prog.html">Efficient Prog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/master-ds2e/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Arrays</h1>
+
+</div>
+
+
+<style>
+div.python pre { background-color: #e9f7f5
+; }
+</style>
+<style>
+div.r pre { background-color: #fff5fd; }
+</style>
+<p>This chapter delves deeper into the concepts of arrays and vectors that were introduced in the ‘Basics’ chapter. In Python, the primary package for working with arrays is numpy. The main advantage of using vectors is that it allows for vectorized operations, rather than using loops to perform operations on each element of an object. Vectorized operations allow for more efficient processing of blocks of data.</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>Let’s first take a look at an example to understand the benefits of using vectorized operations:</p>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+import numpy as np
+import time 
+
+arr = np.arange(2000000)
+
+lst = list(range(2000000))
+
+t = time.time()
+arr_2 = arr*2
+time.time() - t
+## 0.009525775909423828
+t = time.time()
+lst_2 = [i*2  for i in lst]
+time.time() - t
+
+## 0.07934379577636719</code></pre>
+</div>
+</div>
+<div id="create-arrays" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Create arrays</h1>
+<p>The NumPy library contains multidimensional array and matrix data structures and provides methods to efficiently operate on them. If you do not have numpy installed on your computer, you can install it by running <code>pip install numpy</code> in a terminal.</p>
+<p>To use numpy, you need to load the module by running <code>import numpy as np</code>. This allows you to refer to numpy as “np” throughout your code, which keeps it standardized.</p>
+<p>Numpy allows for fast and efficient calculations. The main difference between Numpy and python lists is that all elements in a numpy array must be homogeneous and numpy uses less memory to store data.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Functions</th>
+<th align="right">Tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>array</td>
+<td align="right">Create numpy array</td>
+</tr>
+<tr class="even">
+<td>ndim</td>
+<td align="right">Dimension of the array</td>
+</tr>
+<tr class="odd">
+<td>shape</td>
+<td align="right">Size of the array (Number of rows and Columns)</td>
+</tr>
+<tr class="even">
+<td>size</td>
+<td align="right">Total number of elements in the array</td>
+</tr>
+<tr class="odd">
+<td>dtype</td>
+<td align="right">Type of elements in the array, i.e., int64, character</td>
+</tr>
+<tr class="even">
+<td>reshape</td>
+<td align="right">Reshapes the array without changing the original shape</td>
+</tr>
+<tr class="odd">
+<td>resize</td>
+<td align="right">Reshapes the array. Also change the original shape</td>
+</tr>
+<tr class="even">
+<td>arange</td>
+<td align="right">Create sequence of numbers in array</td>
+</tr>
+<tr class="odd">
+<td>Itemsize</td>
+<td align="right">Size in bytes of each item</td>
+</tr>
+<tr class="even">
+<td>diag</td>
+<td align="right">Create a diagonal matrix</td>
+</tr>
+<tr class="odd">
+<td>vstack</td>
+<td align="right">Stacking vertically</td>
+</tr>
+<tr class="even">
+<td>hstack</td>
+<td align="right">Stacking horizontally</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Starting from existing list or vector :</li>
+</ul>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+import numpy as np
+
+arr = np.array([1, 2, 3, 4])
+arr
+## array([1, 2, 3, 4])</code></pre>
+</div>
+</div>
+<ul>
+<li>Create arrays with zero, one, sequence..</li>
+</ul>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+np.zeros([2, 3])
+
+## array([[0., 0., 0.],
+##        [0., 0., 0.]])
+np.ones((2, 3))
+
+## array([[1., 1., 1.],
+##        [1., 1., 1.]])
+np.arange(1, 7)
+
+## array([1, 2, 3, 4, 5, 6])
+np.arange(1, 7).reshape(2, 3)
+
+## remember from first chapter that array in R and Python aren&#39;t store the same way, set order = &#39;F&#39; to get the same results
+
+## array([[1, 2, 3],
+##        [4, 5, 6]])
+np.arange(1, 7).reshape([2, 3], order = &#39;F&#39;)
+## array([[1, 3, 5],
+##        [2, 4, 6]])
+np.linspace(1, 4,num = 10)
+## array([1.        , 1.33333333, 1.66666667, 2.        , 2.33333333,
+##        2.66666667, 3.        , 3.33333333, 3.66666667, 4.        ])</code></pre>
+</div>
+</div>
+<div id="random-array" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Random array</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+#generate an array
+arr_rd = np.random.randn(4,5)
+
+arr_rd
+## array([[ 0.50320808,  0.34557798, -0.03505043,  0.45996269,  0.74081731],
+##        [-1.0527722 ,  1.32432201, -1.21522509,  0.52188695, -0.33020074],
+##        [-0.76859233,  0.63445116, -1.02110252, -1.20604415,  1.18097256],
+##        [-1.17549039,  0.30543937,  0.80945899,  0.97071295,  1.55427774]])</code></pre>
+</div>
+</div>
+</div>
+<div id="indexing-and-slicing" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Indexing and slicing</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+arr = np.arange(1,7).reshape(2,3)
+arr[0]
+## array([1, 2, 3])
+arr[:2]
+## array([[1, 2, 3],
+##        [4, 5, 6]])
+arr[1:]
+## array([[4, 5, 6]])</code></pre>
+</div>
+</div>
+</div>
+<div id="shape-and-size" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Shape and size</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+# .ndim gives the number of axes, or dimensions, of the array.
+arr_rd.ndim
+## 2</code></pre>
+<pre class="python"><code># Python 
+
+# .size gives the total number of elements of the array. 
+arr_rd.size
+## 20</code></pre>
+<pre class="python"><code># Python 
+
+# .shape display a tuple of integers with the number of elements stored along each dimension of the array
+arr_rd.shape
+## (4, 5)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="modifiying-arrays" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Modifiying arrays</h1>
+<div id="add-elements" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Add elements</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+arr
+
+# /!\ using append it convert the array to a 1d array
+## array([[1, 2, 3],
+##        [4, 5, 6]])
+arr_1d = np.append(arr, [7, 8, 9])
+arr_1d
+
+# using insert you can add rows and columns 
+## array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+np.insert(arr, len(arr), [7, 8, 9], axis = 0)
+## array([[1, 2, 3],
+##        [4, 5, 6],
+##        [7, 8, 9]])
+np.insert(arr, 2, [7, 8], axis = 1)
+## array([[1, 2, 7, 3],
+##        [4, 5, 8, 6]])</code></pre>
+</div>
+</div>
+<ul>
+<li>Combining/splitting arrays</li>
+</ul>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+arr0 = np.zeros([2,3])
+arr1 = np.ones([2,3])
+
+arr01 = np.vstack([arr0,arr1])
+arr01
+
+#or 
+## array([[0., 0., 0.],
+##        [0., 0., 0.],
+##        [1., 1., 1.],
+##        [1., 1., 1.]])
+np.concatenate([arr0,arr1], axis = 0)
+## array([[0., 0., 0.],
+##        [0., 0., 0.],
+##        [1., 1., 1.],
+##        [1., 1., 1.]])
+np.hstack([arr0,arr1])
+
+#or
+## array([[0., 0., 0., 1., 1., 1.],
+##        [0., 0., 0., 1., 1., 1.]])
+np.concatenate([arr0,arr1], axis = 1)
+## array([[0., 0., 0., 1., 1., 1.],
+##        [0., 0., 0., 1., 1., 1.]])
+np.hsplit(arr01,3)
+## [array([[0.],
+##        [0.],
+##        [1.],
+##        [1.]]), array([[0.],
+##        [0.],
+##        [1.],
+##        [1.]]), array([[0.],
+##        [0.],
+##        [1.],
+##        [1.]])]
+np.vsplit(arr01,4)
+## [array([[0., 0., 0.]]), array([[0., 0., 0.]]), array([[1., 1., 1.]]), array([[1., 1., 1.]])]</code></pre>
+</div>
+</div>
+</div>
+<div id="delete-elements" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Delete elements</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+np.delete(arr,1 , axis = 1)
+## array([[1, 3],
+##        [4, 6]])
+np.delete(arr,1 , axis = 0)
+## array([[1, 2, 3]])</code></pre>
+</div>
+</div>
+</div>
+<div id="sorting" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Sorting</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+arr = np.random.randn(10)
+
+arr
+## array([ 0.23412893,  1.63226615,  0.1006389 , -1.61064897, -0.49436163,
+##         0.20972199,  0.04154076, -0.03509354,  1.25244542,  0.96194942])
+arr.sort()
+</code></pre>
+<pre class="python"><code># Python 
+
+arr = np.random.randn(4,3)
+
+arr
+## array([[-0.06118497,  2.00411691,  0.64480184],
+##        [ 0.07704387,  1.66134564,  0.03189438],
+##        [ 0.57373928, -0.14405438,  0.66390507],
+##        [ 2.28505603,  0.35843458, -0.84114849]])
+arr.sort(1)
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="conditional-logic-on-array" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Conditional Logic on array</h1>
+<p>Imagine you have two square matrices representing interactions between entities. Each matrix represents a basic network, with a value of 1 indicating interaction and 0 indicating no interaction. You want to determine if two entities that are linked in one network are also linked in another network. Instead of checking each entity’s interaction sequentially in a loop, you can use matrix operations to perform element-wise calculations and get the same result in a more efficient manner.</p>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+#generate a list
+list_1 = [[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]]
+network_1 = np.array(list_1)
+
+#generate a sequence
+list_2 = [[0,1,0,0],[1,0,0,0],[0,0,0,1],[0,0,1,0]]
+network_2 = np.array(list_2)
+
+network_12 = network_1*network_2
+network_12
+## array([[0, 1, 0, 0],
+##        [1, 0, 0, 0],
+##        [0, 0, 0, 1],
+##        [0, 0, 1, 0]])</code></pre>
+</div>
+</div>
+<div id="select-specific-elements" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Select specific elements</h2>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+network_12 &gt; 0
+## array([[False,  True, False, False],
+##        [ True, False, False, False],
+##        [False, False, False,  True],
+##        [False, False,  True, False]])
+network_12[network_12&gt;0]
+## array([1, 1, 1, 1])</code></pre>
+</div>
+</div>
+<p>One thing that is commonly needed is to modify specific values in an array that meet a certain condition. The first step is to identify which cells meet the condition. In Python, the function <code>np.where</code> is commonly used.</p>
+<p>It is important to note that the execution time can change depending on the size of the vector.</p>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+arr = np.arange(200000)
+
+
+t = time.time()
+results = [(i if i%2==0 else 0) for i in arr]
+time.time() - t
+
+## 0.08428573608398438
+t = time.time()
+results = np.where(arr%2!=0,0,arr)
+time.time() - t
+## 0.012808084487915039</code></pre>
+<pre class="python"><code># Python 
+
+arr = np.arange(20000000)
+
+
+t = time.time()
+results = [(i if i%2==0 else 0) for i in arr]
+time.time() - t
+
+## 7.678952217102051
+t = time.time()
+results = np.where(arr%2!=0,0,arr)
+time.time() - t
+## 0.7165718078613281</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="algebra" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Algebra</h1>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+from numpy.linalg import inv, qr 
+ 
+X = np.array([[0,1,5,1],[2,1,3,1],[2,1,9,6],[7,2,1,0],[8,3,5,5]]) 
+Y = np.array([0,1,2,5,4])
+
+X
+## array([[0, 1, 5, 1],
+##        [2, 1, 3, 1],
+##        [2, 1, 9, 6],
+##        [7, 2, 1, 0],
+##        [8, 3, 5, 5]])
+X.T.dot(X) 
+# same as 
+## array([[121,  42,  71,  54],
+##        [ 42,  16,  34,  23],
+##        [ 71,  34, 141,  87],
+##        [ 54,  23,  87,  63]])
+XtX = np.dot(X.T,X)
+# same as 
+X.T @ X
+
+# inverse Matrix
+## array([[121,  42,  71,  54],
+##        [ 42,  16,  34,  23],
+##        [ 71,  34, 141,  87],
+##        [ 54,  23,  87,  63]])
+inv(XtX)
+
+## array([[ 0.23199214, -0.71424803,  0.11636773, -0.09879148],
+##        [-0.71424803,  2.33481201, -0.37284193,  0.27469787],
+##        [ 0.11636773, -0.37284193,  0.10787934, -0.11260311],
+##        [-0.09879148,  0.27469787, -0.11260311,  0.15576444]])</code></pre>
+<pre class="python"><code># Python 
+
+XtY = np.dot(X.T,Y)
+
+# OLS 
+Beta = inv(XtX).dot(XtY)
+Beta
+## array([ 1.17202187, -1.85550547,  0.42034337, -0.38384807])</code></pre>
+</div>
+</div>
+</div>
+<div id="operation-on-array" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Operation on array</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th align="center">Equivalent</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td align="center">np.add</td>
+<td align="right">Addition (e.g., 1 + 1 = 2)</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td align="center">np.subtract</td>
+<td align="right">Subtraction (e.g., 3 - 2 = 1)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td align="center">np.negative</td>
+<td align="right">Unary negation (e.g., -2)</td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td align="center">np.multiply</td>
+<td align="right">Multiplication (e.g., 2 * 3 = 6)</td>
+</tr>
+<tr class="odd">
+<td>/</td>
+<td align="center">np.divide</td>
+<td align="right">Division (e.g., 3 / 2 = 1.5)</td>
+</tr>
+<tr class="even">
+<td>//</td>
+<td align="center">np.floor_divide</td>
+<td align="right">Floor division (e.g., 3 // 2 = 1)</td>
+</tr>
+<tr class="odd">
+<td>**</td>
+<td align="center">np.power</td>
+<td align="right">Exponentiation (e.g., 2 ** 3 = 8)</td>
+</tr>
+<tr class="even">
+<td>%</td>
+<td align="center">np.mod</td>
+<td align="right">Modulus/remainder (e.g., 9 % 4 = 1)</td>
+</tr>
+</tbody>
+</table>
+<div class="row">
+<div class="python">
+<pre class="python"><code># Python 
+
+network_12 = np.triu(network_12,1)
+
+# nb of link
+network_12.sum()
+# same since there is only 0 and 1 
+## 2
+(network_12&gt;0).sum()
+
+# share of link 
+## 2
+network_12.mean()
+
+
+# nb link by entities
+## 0.125
+network_12.sum(axis=1)
+
+# share of link across entities (by columns)
+## array([1, 0, 1, 0])
+network_12.mean(1)
+
+## array([0.25, 0.  , 0.25, 0.  ])</code></pre>
+</div>
+</div>
+<div id="map-python" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Map (Python)</h2>
+<p>In python we can use <code>map</code> to do the same thing than apply familly in R with a bit of manipulation.</p>
+<p><code>map</code> takes different types of input and transforms it by row if the object is an array, returning an iterator. You can then transform this iterator into a list or an array.</p>
+<div class="python">
+<pre class="python"><code># Python
+
+arr_1 = np.arange(1,17).reshape([4,4], order = &#39;F&#39;)
+arr_1
+
+
+# by row, by columns you need to tranpose the array
+## array([[ 1,  5,  9, 13],
+##        [ 2,  6, 10, 14],
+##        [ 3,  7, 11, 15],
+##        [ 4,  8, 12, 16]])
+map(np.sum,arr_1)
+## &lt;map object at 0x7f33663cc898&gt;
+list(map(np.sum,arr_1))
+
+
+# with a list
+## [28, 32, 36, 40]
+lst_1 = [arr_1,np.linspace(1,8,num=arr_1.size)]
+
+list(map(lambda x: x**2,lst_1))
+## [array([[  1,  25,  81, 169],
+##        [  4,  36, 100, 196],
+##        [  9,  49, 121, 225],
+##        [ 16,  64, 144, 256]]), array([ 1.        ,  2.15111111,  3.73777778,  5.76      ,  8.21777778,
+##        11.11111111, 14.44      , 18.20444444, 22.40444444, 27.04      ,
+##        32.11111111, 37.61777778, 43.56      , 49.93777778, 56.75111111,
+##        64.        ])]</code></pre>
+</div>
+<ul>
+<li>Pandas’ apply function:</li>
+</ul>
+<p>When using pandas, you can also use apply functions. The difference between “apply” and “map” is that, by default, “apply” works on columns, because variables in a dataframe are stored by columns.</p>
+<div class="python">
+<pre class="python"><code># Python
+
+import pandas as pd
+
+arr_1 = np.arange(1,17).reshape([4,4], order = &#39;F&#39;)
+
+#transform the array into a DataFrame
+df_1 = pd.DataFrame(arr_1)
+df_1
+
+
+# Apply the function by column
+##    0  1   2   3
+## 0  1  5   9  13
+## 1  2  6  10  14
+## 2  3  7  11  15
+## 3  4  8  12  16
+df_1.apply(sum)
+
+## 0    10
+## 1    26
+## 2    42
+## 3    58
+## dtype: int64</code></pre>
+</div>
+</div>
+</div>
+<div id="exercises" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Exercises</h1>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 1</strong></p>
+<p>The series, <span class="math inline">\(1^{1} + 2^{2} + 3^{3} + ... + 10^{10} = 10405071317\)</span>.</p>
+<p>Find the last ten digits of the series, <span class="math inline">\(1^{1} + 2^{2} + 3^{3} + ... + 1000^{1000}\)</span>.</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 2</strong></p>
+<p>Try to vectorize exercices from chapter 1, you can also compare it with apply/map functions.</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 3</strong></p>
+<p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
+<p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 4</strong> A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.</p>
+<p>Find the largest palindrome made from the product of two 3-digit numbers.</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p><a href="exo_chap_2.html">Solutions</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

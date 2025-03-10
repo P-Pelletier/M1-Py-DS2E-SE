@@ -1,0 +1,1642 @@
+---
+title: "Basics"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error=TRUE,collapse = T)
+library(reticulate)
+
+#  md_document:
+#    variant: markdown_github
+#
+#
+#<div class = "row">
+#<div class = "row">
+#<div class = "python">
+#  
+#
+#</div>
+#</div>
+#<div class = "row">
+#<div class = "r">  
+#  
+#  
+#</div>
+#</div>
+#</div>
+
+
+#<style>
+#div.blue pre { background-color:lightblue; }
+#div.blue pre.r { background-color:blue; }
+#</style>
+#
+```
+
+<style>
+div.python pre { background-color: #e9f7f5
+; }
+</style>
+
+<style>
+div.r pre { background-color: #fff5fd; }
+</style>
+
+
+<style>
+div.exo pre { background-color: #e3e9ea; }
+</style>
+
+
+<p>&nbsp;</p>
+
+This chapter introduces the basics of Python, focusing on the different types of objects that can be used in each language, as well as control flow and function writing. 
+
+
+
+<p>&nbsp;</p>
+
+
+
+# Python Strengths
+
+Python is a general-purpose programming language that was created by computer scientist Guido van Rossum in 1991. The language was designed to be highly readable and to encompass a wide range of programming paradigms. One of Python's key strengths is its flexibility, which allows it to handle a variety of tasks such as web frameworks, database connectivity, networking, web scraping, text and image processing, and many other features that are useful in machine learning.
+
+Python is based on computer science and mathematics and boasts one of the largest ecosystems of any programming language, with over 100,000 open-source libraries. This makes it an ideal choice for those who value flexibility.
+
+Python also has a rich set of data science libraries, including Scikit Learn, the most popular machine learning library, which is easy to learn, supports pipelines to simplify the machine learning workflow and has most of the algorithms you need in one place. Another common library is TensorFlow, developed by software engineers at Google for deep learning and commonly used for image recognition and natural language processing tasks. PyTorch, developed by Facebook is also a popular deep learning framework and a concurrent of Tensorflow and Keras (which is designed for efficiently building neural networks).
+ 
+- Python is easier to deploy in production settings. It has better integration with platforms like Docker, Kubernetes, and cloud environments, which is crucial for building data-driven applications.
+
+- Machine learning is done using Python for its capability in the Scikit Learn, TensorFlow, Keras and PyTorch pipeline.
+
+- Python is better at integrating with other technologies, like databases (SQL, MongoDB), web frameworks (Flask, Django), cloud services, and DevOps tools. It’s also used in production environments more frequently.
+
+# Operations
+
+## Arithmetic Operations
+Python work as classical calculator, using "+", "-", "*" and "/" we can do arithmetic operations in both languages.
+
+<div class = "row">
+<div class = "python">
+
+```{python ope}
+# Python 
+
+1+2
+1-2
+1/2
+1*2
+
+```
+
+</div>
+</div>
+
+<p>&nbsp;</p>
+
+We can also apply exponentiation, Modulo and floor division easily in both language. 
+
+
+<div class = "row">
+<div class = "python">
+
+```{python ope2,echo = T,collapse = TRUE}
+# Python 
+
+2**8 # exponentiation
+2^8 == 2**8 # False
+8%3 # modulo
+8//3 # floor division
+```
+
+</div>
+</div>
+
+| Operator  | Description        |
+|-------------------|--------------------|
+| +                 | Addition           |
+| –                 | Subtraction        |
+| *                 | Multiplication     |
+| /                 | Division           |
+| **                | Exponent           |
+| %                 | Modulo             |
+| //                | Floor Division     |
+
+
+
+<p>&nbsp;</p>
+##  Comparison Operators
+
+To compare values, we use comparison operators to determine if a value is equal to, not equal to, greater than, etc.
+
+These operators are the same in both languages.
+
+<div class = "row">
+<div class = "python">
+```{python comp,echo = T,collapse = TRUE}
+# Python 
+
+2==8
+2!=8
+2<8
+2>8
+2<=8
+
+```
+
+</div>
+</div>
+
+
+| Operator  | Description              |
+|-------------------|--------------------------|
+| \<                | Less than                |
+| \>                | Greater than             |
+| \<=               | Less than or equal to    |
+| \>=               | Greater than or equal to |
+| ==                | Equal to                 |
+| !=                | Not equal to             |
+
+
+<p>&nbsp;</p>
+
+## Logical operators
+
+
+<div class = "row">
+<div class = "python">
+```{python logope,echo = T,collapse = TRUE}
+# Python 
+x = [True,True]
+y = [True,False]
+
+not x[0]
+x and y
+x or y
+```
+</div>
+</div>
+
+| Operator  | Description                 |
+|-------------------|-----------------------------|
+| not               | Logical NOT                 |
+| and               | Element-wise logical AND    |
+| or                | Element-wise logical OR     |
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+**Exercise 1:** Write a Python expression that checks if a number is both greater than 10 and less than 20.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+number = 15
+result = 10 < number < 20
+print(result)
+```
+</details>  
+
+
+<p>&nbsp;</p>
+
+**Exercise 2:** Write a Python expression that checks if a string is either "yes" or "no".
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+string = "yes"
+result = string == "yes" or string == "no"
+print(result)
+```
+</details>  
+</div>
+
+<p>&nbsp;</p>
+
+## Membership operators
+
+In Python, the 'in' and 'not in' operators are used to test membership within a sequence, such as a list, tuple, or string. These operators allow for checking if a particular value exists in a sequence. For instance, a list of characters can be decomposed into individual elements. A practical example would be checking if the string 'Hello' exists in the phrase 'Hello world' using the 'in' operator. This functionality enables simple membership testing for strings and other iterable objects.
+
+<div class = "row">
+<div class = "python">
+```{python relope,echo = T,collapse = TRUE}
+# Python 
+x = 'Hello world'
+y = {1:'a',2:'b'}
+
+print('world' in x)
+
+print(1 in y)
+
+print('a' in y)
+```
+
+</div>
+</div>
+
+
+
+<p>&nbsp;</p>
+
+<div class = "row">
+<div class = "python">
+```{python relope2,echo = T,collapse = TRUE}
+# Python 
+x = ['Hello','World']
+
+print('Hello' in x)
+```
+
+</div>
+</div>
+
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:** Write a Python expression that checks if the letter "a" is present in the string "banana".
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+string = "banana"
+result = "a" in string
+print(result)
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Write a Python expression that checks if the number 5 is not present in the list [1, 2, 3, 4].
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+list_ = [1, 2, 3, 4]
+result = 5 not in list_
+print(result)
+```
+</details>  
+
+</div>
+
+
+
+
+<p>&nbsp;</p>
+
+# Objects & Variables
+Python does not require declaring a variable before assigning a value to it. Variables can be thought of as names that refer to an object. However, there is a difference in the way objects and variables are stored in the computer's memory in Python compared to R.
+
+## Textual and numerical variables
+In Python, textual data is referred to as a 'string', abbreviated as 'str'. You can use either " or ' when defining a textual variable, and it's possible to explicitly set a variable as a textual variable if needed.
+
+Numerical variables in Python are divided into three types: integer, float, and complex. The data-type 'float' has a precision of 15 digits. There are ways to achieve higher precision using libraries like Numpy.
+
+Finally, it's easy to check the data type of a variable by using the command `type` in Python.
+
+<div class = "row">
+<div class = "python">
+```{python tnv,echo = T,collapse = TRUE}
+# Python 
+
+import sys 
+sys.float_info.dig # number of decimals
+
+a = 1
+type(a)
+
+b = 1.1
+type(b)
+
+c = 1.1+2j
+type(c)
+
+d = 'd'
+type(d)
+
+# change the type
+e = 2
+f = str(e)
+f
+float(f)
+```
+
+</div>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+## Other Data-Type 
+
+
+In Python, the most common data types are List, Tuple, Sets, and Dictionary. It's important to note that when modifying a variable, we always use '='. Keep in mind that using the '.' in Python can modify the object behind the variable.
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:** Create a variable containing your full name, then extract and print only your first name using string slicing.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+full_name = "John Smith"
+first_name = full_name.split()[0] 
+print(first_name)
+```
+</details> 
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Write a Python expression that checks if 'ab' is present in the list ['aa','bb','ab','ba'].
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+list_ = ['aa','bb','ab','ba']
+result = 'ab' in list_
+print(result)
+```
+</details> 
+
+</div>
+
+<p>&nbsp;</p>
+
+### Lists 
+
+Keep in mind that Lists are mutable.
+
+
+<div class = "row">
+<div class = "python">
+```{python lst,echo = T,collapse = TRUE}
+# Python
+
+a = [1, 2, 3]
+a.count(2) # count elements of the list which are exactly equal to 2
+
+a.sort(reverse = True)
+a
+# access the element of a list
+a[0]
+a.index(3)
+a[1:]
+a[:1]
+a[0:-1]
+a[:]
+
+```
+
+```{python lst2,echo = T,collapse = TRUE}
+# modify
+
+b = [0, 0, 0]
+list(zip(a,b)) # zip will pairs the ellements, it works also with more than 2 element ex: zip(a,b,c)
+a.append(b)
+a
+a[4:5] = ['a','b']
+a
+a.extend([4, 5, 6])
+a
+a += [7,8] # works as extend
+a
+a.insert(2,[1,2])
+a
+a.remove(b)
+a
+
+a = a*2 # replicate the list n times
+len(a) # number of elements in the list
+
+```
+
+```{python lst3,echo = T,collapse = TRUE}
+# mutable
+
+a = [1,2,3]
+b = a
+b[0] = 12
+a
+
+```
+</div>
+</div>
+
+
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**  Given a list [5, 2, 8, 1, 9], sort the list in ascending order.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+my_list = [5, 2, 8, 1, 9]
+my_list.sort()
+print(my_list)
+```
+</details> 
+
+<p>&nbsp;</p>
+
+**Exercise 2:** Given a list ['apple', 'banana', 'apple', 'orange'], write code to count the number of times "apple" appears.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+my_list = ['apple', 'banana', 'apple', 'orange']
+count = my_list.count('apple')
+print(count)
+```
+</details> 
+
+
+</div>
+
+
+<p>&nbsp;</p>
+### tuples
+
+The main difference between Lists and tuples is the fact that tuples is an immutable type of data, making it faster to use.
+
+<div class = "row">
+<div class = "python">
+```{python tup,echo=T,collapse = TRUE}
+# Python
+
+a = (1, 2, 3)
+a.count(2) # count elements of the tuple which are exactly equal to 2
+
+a
+# access the element of a tuple
+a[0]
+a.index(3)
+a[1:]
+a[:1]
+a[0:-1]
+a[:]
+
+```
+```{python tup2,echo = T,collapse = TRUE}
+
+# modify
+a += (4,5) 
+a
+a = a*2 # replicate the tuple n times
+len(a) # number of elements in the tuple
+
+```
+```{python tup3,echo = T,collapse = TRUE}
+# immutable
+
+a = (1,2,3)
+b = a
+b += (4,5)
+a
+
+b[0] = 3 #immutable
+
+```
+</div>
+</div>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**   Create a tuple with the values (10, 20, 30). Then, try to change the first element of the tuple and observe the error.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, error = T, collapse = TRUE}
+my_tuple = (10, 20, 30)
+my_tuple[0] = 15
+print(my_tuple)
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:** Create a function that takes a tuple as input and returns a new tuple with the elements in reverse order without using the reverse() method.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+my_tuple = (1, 2, 2, 3, 4, 2)
+reversed_tuple = my_tuple[::-1]
+print(reversed_tuple)
+```
+</details>  
+
+
+</div>
+
+<p>&nbsp;</p>
+### Dictionaries
+
+Dictionary refers to a way of storing data that is not sorted. It works with key and value associate with this key.
+
+
+<div class = "row">
+<div class = "python">
+```{python dic,echo=T,collapse = TRUE}
+# Python
+
+a = {'a':1, 'b':2, 'c':3}
+# access the element of a dictionary
+a.keys()
+a['a']
+a.values()
+a.items()
+a.get('a')
+a.get('d',4) # set to 4 if the key 'd' is not detected
+
+a.pop('a') # pop will use the corresponding value to the key a and remove the pair (key, value).
+a
+a.popitem() # pop the last item
+a
+```
+```{python dic2,echo = T,collapse = TRUE}
+# modify
+a['a'] =1 
+a.setdefault('d',0) # create new item with a default value
+a
+b = {'d':4,'e':5}
+a.update(b) # update values from other dict
+a
+a.clear() # remove all items
+a
+```
+```{python dic3,echo = T,collapse = TRUE}
+# mutable
+
+a = {'a':1, 'b':2, 'c':3}
+b = a
+b['b'] = [12,14]
+a
+```
+
+</div>
+</div>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**   Create a dictionary that assign the keys "name", "age", and "city" to some values. Change then the value of 'city' and assign a list of two cities to this key. Finaly add a third city to the list by using the append method.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T, error = T, collapse = TRUE}
+my_dict = {"name": "Pierre", "age": 29, "city": "Strasbourg"}
+my_dict['city'] = ["Strasbourg","Schiltigheim"]
+print(my_dict)
+my_dict['city'].append('Colmar')
+```
+
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Given a dictionary {'a': 1, 'b': 2, 'c': 3}, write code to add a new key-value pair "d": 4.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+my_dict["d"] = 4
+print(my_dict)
+```
+</details>  
+
+
+</div>
+
+<p>&nbsp;</p>
+### Sets
+
+Sets are unordered collection of unique elements. If we give to a set multiple time the same element, it will automatically delete duplicated values.
+
+
+<div class = "row">
+<div class = "python">
+```{python set,echo=T,collapse = TRUE}
+# Python
+
+a = {1, 2, 3}
+a
+# access the element of a set
+
+a[0] # since it unordered, we can not access to a given element of a set
+
+
+```
+```{python set2,echo = T,collapse = TRUE}
+# modify
+b = {3,4,5}
+a.update(b)  # update values from other set
+a
+
+```
+```{python set3,echo = T,collapse = TRUE}
+# mutable
+
+a = {1, 2, 3}
+b = a
+b.update([12,14])
+a
+```
+</div>
+</div>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**    Create two sets, set1 and set2, with some overlapping elements. Then, find the intersection of the two sets.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T, error = T, collapse = TRUE}
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+intersection = set1.intersection(set2)
+print(intersection)
+```
+</details> 
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Create a set from the list [1, 2, 2, 3, 4, 4, 5] and observe how duplicate values are handled.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+my_list = [1, 2, 2, 3, 4, 4, 5]
+my_set = set(my_list)
+print(my_set)
+```
+</details> 
+
+</div>
+<p>&nbsp;</p>
+### Arrays
+
+To manipulate arrays in Python, we use the numpy package. This package is very useful and will be discussed in more detail in later chapters.
+
+It's worth noting that in R, arrays are created using vectors and are stored in column-major order, which is different from how arrays are handled in Python.
+
+<div class = "row">
+<div class = "python">
+
+```{python ar,echo=T,collapse = TRUE}
+# Python
+
+import numpy
+arr = numpy.array([[1,4],[2,5],[3,6]])
+arr
+
+type(arr)
+
+vec = [1,2,3,4,5,6]
+
+arr = numpy.reshape(vec,(3,2))
+arr
+arr = numpy.reshape(vec,(3,2), order = 'F')
+arr
+
+vec = range(1,7)
+numpy.array(vec).reshape(2,3)
+
+# diagonal array
+numpy.diagflat([1]*3)
+```
+
+
+</div>
+</div>
+
+
+<div class = "row">
+<div class = "python">
+```{python ar2,echo=T,collapse = TRUE}
+# Python
+
+# access the element of an array
+
+arr[0] # access directly to the raw 1
+
+
+```
+```{python ar3,echo = T,collapse = TRUE}
+# modify
+vec = [7,8]
+arr = numpy.insert(arr, len(arr),vec,axis = 0)  # update values from other set
+arr
+
+```
+```{python ar4,echo = T,collapse = TRUE}
+# mutable
+
+arr2 = arr
+arr2[0] = [12,14]
+arr
+```
+
+</div>
+</div>
+
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**    Create a NumPy array with the values [[1, 2, 3], [4, 5, 6]]. Then, print the element at row 1, column 2.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T, error = T, collapse = TRUE}
+import numpy as np
+my_array = np.array([[1, 2, 3], [4, 5, 6]])
+print(my_array[1, 2])
+```
+</details> 
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Create a NumPy array with the values [1, 2, 3, 4, 5, 6]. Then, reshape it into a 2x3 matrix.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+import numpy as np
+my_array = np.array([1, 2, 3, 4, 5, 6])
+reshaped_array = my_array.reshape(2, 3)
+print(reshaped_array)
+```
+</details> 
+
+</div>
+
+<p>&nbsp;</p>
+
+### Data Frame
+
+Pandas Data Frames are also very common data-type in Python. The package Pandas is also view deeper in following chapters.
+
+<div class = "row">
+<div class = "python">
+```{python pd,echo = T,collapse = TRUE}
+# Python
+
+import pandas
+
+df = pandas.DataFrame(arr)
+df
+
+vec = [1,2,3,4,5,6]
+
+df = pandas.DataFrame({'vec':vec,'vec1':range(2,8)})
+df
+```
+</div>
+</div>
+
+
+<div class = "row">
+<div class = "python">
+```{python,echo=T,collapse = TRUE}
+# Python
+
+# access element of a Pandas Data Frame
+
+df['vec'] 
+
+```
+```{python,echo = T,collapse = TRUE}
+# modify
+vec2 = range(3,9)
+df['vec2'] = vec2 # add values from other vector
+a
+
+```
+```{python,echo = T,collapse = TRUE}
+# mutable
+
+df2 = df
+df['vec'][0] = 30
+df2
+```
+</div>
+</div>
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+
+**Exercise 1:**   Create a Pandas DataFrame from a dictionary with two columns: "Name" and "Age".
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T, error = T, collapse = TRUE}
+import pandas as pd
+data = {"Name": ["Alice", "Bob"], "Age": [25, 24]}
+df = pd.DataFrame(data)
+print(df)
+
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Add a new column to a Pandas DataFrame that contains the square of 'Age'.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+df["Squared_Age"] = df["Age"] ** 2
+print(df)
+```
+</details>  
+
+
+</div>
+
+
+# Control flow
+
+In programming, there are two main control flow tools: conditional statements and loops.
+
+Conditional statements, also known as choices, are useful for establishing rules or conditions. They allow for modifying a value according to a certain condition, and generally allow for certain actions to be taken in specific cases.
+
+Loops, on the other hand, allow for sequential execution of actions. They can be used to interactively modify an object, and generally allow for a procedure to be executed multiple times. For example, we can use loops to create multiple similar objects, or to modify multiple lines in a single object.
+
+
+## Choices
+
+
+
+<div class = "row">
+<div class = "python">
+```{python,echo = T,collapse = TRUE}
+# Python 
+
+# if, elif, else
+
+n = 12
+
+if n%2 == 0 :  
+  print('n is an even number')
+  
+
+
+
+if n != int(n): 
+  print('n is not a integer')
+elif  n%2 == 0 :
+  print('n is an even number')
+else:
+  print('n is not an even number')
+  
+  
+
+  
+```
+
+</div>
+</div>
+
+<p>&nbsp;</p>
+
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+ 
+
+**Exercise 1:**   Write a condition that returns "there is an 'e'" if there is an 'e' in a given word, and "there is no 'e'" otherwise.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, error = T, collapse = TRUE}
+word = 'hello'
+if 'e' in word:
+  print("there is an 'e'")
+else:
+  print("there is no 'e'")
+
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:** categorizes a word based on its length: "short" if the word has 3 or fewer characters, "medium" if the word has between 4 and 6 characters and "long" if the word has 7 or more characters
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T,collapse = TRUE}
+if len(word) <= 3:
+    print("short")
+elif len(word) <= 6:
+    print("medium")
+else:
+    print("long")
+```
+</details>  
+
+
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+## Loops
+
+With 'loops', we iterate over a predefined number of iterations. However, in certain situations we may not know in advance how many iterations are required to complete a task.
+
+For example, when trying to optimize a function, we may not know how many steps are needed to reach an optimum, but we can set a condition for when the algorithm is considered to have converged. In such cases, we can use a 'while' loop, which will iterate until a given condition is met.
+
+
+<div class = "row">
+<div class = "python">
+```{python,echo = T,collapse = TRUE}
+# Python 
+
+seq = [1,2,None,4,None,6]
+total = 0
+
+for val in seq:
+  if val is not None:
+    total += val
+    
+total
+```
+
+```{python,echo = T,collapse = TRUE}
+# Python 
+import random
+
+total = 0
+while total < 1:
+  rnd = random.gauss(mu = 0, sigma = 1)
+  if rnd < 0:
+    pass
+  else:
+    total += rnd
+  
+total
+
+```
+
+</div>
+</div>
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+ 
+
+**Exercise 1:** Write a for loop that prints the numbers from 1 to 10.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, error = T, collapse = TRUE}
+for i in range(1, 11):
+    print(i)
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:**  Write a while loop that keeps prompting the user for input until they enter "quit".
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, eval=FALSE,collapse = TRUE}
+user_input = ""
+while user_input != "quit":
+    user_input = input("Enter something (or 'quit'): ")
+```
+</details>  
+
+</div>
+
+<p>&nbsp;</p>
+
+
+## Some differences between R and Python
+
+### R
+
+- R's functionalities are developed by statisticians, giving it specific advantages in certain fields.
+- In R, a variable and an object are the same thing; they refer to the same entities. If we assign a new variable to a variable that already exists, it will refer to two different objects.
+- We should generally avoid using `for` loops in R as they are very slow because they execute a function call with every iteration.
+- Instead of `for` loops, we should use vectorization and the `apply` family of functions for better performance. Vectorization is crucial for fast code in R.
+- If data exceeds the limit of memory, R may not be the best choice for performance.
+
+### Python
+
+- Python is widely appreciated for being a versatile language with an easy-to-understand syntax.
+- In Python, variables refer to an object, but they are still two separate entities. This means that two variables can refer to a single object. If two variables point to the same object, any modifications made using one variable will also be reflected when using the other variable.
+- Python also benefits from vectorization for speed, and if other factors are equal, vectorized Python code should perform similarly to vectorized R code.
+
+
+<div class = "row">
+<div class = "python">
+```{python ov,echo = T,collapse = TRUE}
+a = 1
+b = a
+a += 1
+print(a)
+print(b)
+
+a = [1,2]
+b = a
+a.append(3)
+print(a)
+print(b)
+
+a = (1,2)
+b = a
+a += (3,)
+print(a)
+print(b)
+```
+
+</div>
+</div>
+
+<p>&nbsp;</p>
+
+
+## List, Set and Dict comprehensions 
+
+List comprehension is very common and appreciate in the python language features, think of it as a loop for which we will directly store output in a list, set, or dict. we can use it as a filter for example.
+
+
+<div class = "row">
+<div class = "python">
+```{python,echo=T,collapse = TRUE}
+# Python 
+# List
+import time
+
+lst = [1,2,3,4]
+
+t = time.time() 
+results = []
+for val in lst:
+  if val > 2:
+    results.append(val)
+time.time()-t
+
+results
+
+t = time.time() 
+# this loop their will produce the same output than a using List comprehension.
+results = [val for val in lst if val>2]
+time.time()-t
+
+results
+```
+
+```{python,echo=T,collapse = TRUE}
+# Python 
+# Set
+import time
+
+st = {1,2,3,4}
+
+t = time.time() 
+results = set([])
+for val in st:
+  if val > 2:
+    results.add(val)
+time.time()-t
+
+results
+
+t = time.time() 
+
+# this loop their will produce the same output than a using Set comprehension.
+results = {val for val in st if val>2}
+time.time()-t
+
+results
+```
+
+```{python,echo=T,collapse = TRUE}
+# Python 
+# Dict
+import time
+
+dct = {'a':1,'b':2,'c':3,'d':4}
+
+t = time.time() 
+results = dict([])
+for val in dct:
+  if dct[val] > 2:
+    results.update({str(val): dct[val]})
+time.time()-t
+
+results
+
+t = time.time() 
+# this loop their will produce the same output than a using Dict comprehension.
+results = {str(val): dct[val] for val in dct if dct[val]>2}
+time.time()-t
+
+results
+```
+
+</div>
+</div>
+
+
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+ 
+
+**Exercise 1:**   Use list comprehension to create a new list containing only the even numbers from an existing list.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, error = T, collapse = TRUE}
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = [x for x in numbers if x % 2 == 0]
+print(even_numbers)
+```
+</details>  
+
+<p>&nbsp;</p>
+
+**Exercise 2:** Use dictionary comprehension to create a dictionary where the keys are numbers from 1 to 5 and the values are their squares.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T,collapse = TRUE}
+squares = {x: x**2 for x in range(1, 6)}
+print(squares)
+```
+</details>  
+
+
+</div>
+
+
+
+<p>&nbsp;</p>
+# Functions
+
+Functions are an important aspect of Python. Being able to write our own functions can be more efficient than searching for and understanding a pre-existing package.
+
+Writing our own functions gives us more flexibility and a better understanding of what we are doing. However, it is important to not reinvent the wheel and instead use pre-existing packages when appropriate. It is crucial to carefully read the documentation when using packages, as they can be misleading and lead to a lot of time spent trying to understand how they work. It is also beneficial to look at the package's source code when unsure of what a function does behind the scenes.
+
+The full power of programming comes from the ability to be autonomous by reading, modifying, and writing code, as well as reusing pre-existing code.
+
+
+
+
+<p>&nbsp;</p>
+## General Functions 
+
+<div class = "row">
+<div class = "python">
+```{python,echo = T,collapse = TRUE}
+# Python 
+seq = [1,2,None,4,None,6]*120
+
+def clean_sum(seq):
+  total = 0
+
+  for val in seq:
+    if val is not None:
+      total += val
+  return total
+  
+t = time.time()
+clean_sum(seq = seq)
+time.time() - t
+
+
+def clean_sum2(seq):
+  total = sum(filter(None,seq))#[val for val in seq if val is not None])
+  return total
+  
+t = time.time()
+clean_sum2(seq = seq)
+time.time() - t
+
+
+```
+
+</div>
+</div>
+
+Functions in Python are objects and can have attributes and methods like any other object. Functions can also contain data variables and even other functions.
+
+For example, if we want to apply multiple transformations to data, we can create separate functions for each task. These functions can be stored in a list and applied sequentially with ease.
+
+It's worth noting that in Python, it is possible to unpack the output of a function into multiple variables by specifying them before the assignment.
+
+
+
+<div class = "row">
+<div class = "python">
+```{python,echo = T,collapse = TRUE}
+# Python 
+
+def add_two(nb):
+   nb = [i+2 for i in nb]
+   return nb
+    
+def square_nb(nb):
+   nb = [i**2 for i in nb]
+   return nb
+
+def global_function(nb):
+   for function in func_list:
+      nb = function(nb)
+   return nb
+
+func_list = [add_two,square_nb]
+
+x1, x2 = global_function([2,3])
+x1
+x2
+```
+
+</div>
+</div>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+ 
+
+**Exercise 1:**  Write a function that takes a list of numbers as input and returns the average of the numbers. Check first that the list is not None before computing the average.
+
+<details>
+<summary>Click here to see the solution</summary>
+
+```{python,echo = T, error = T, collapse = TRUE}
+def average_list(numbers):
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)
+
+my_list = [1, 2, 3, 4, 5]
+average = average_list(my_list)
+print(average)
+```
+</details>  
+</div>
+
+
+## Error and Exception Handling
+
+It is important to understand why a given function may produce an error. Determining the situations where errors may occur is not always easy, but it's important to not be too lenient in order to avoid errors. In the examples, we will see how the flexibility of a function can lead to different results, some of which may be more efficient than others.
+
+For example, if we expect that 99% of the time the result will contain something iterable, we would use the try/except approach. This will be faster if exceptions are truly exceptional. However, if the result is None more than 50% of the time, then using an 'if' statement is probably a better approach.
+
+While an 'if' statement always has a cost, setting up a try/except block is relatively inexpensive. However, when an exception does occur, the cost is much higher.
+
+<div class = "row">
+<div class = "python">
+```{python,echo = T,collapse = TRUE}
+# Python 
+import numpy as np
+
+# Let's create a function that create a dirty list
+def create_dirty_list(None_prop):
+  list_ = list()
+  for i in range(10000):
+    if i<None_prop*10000:
+      list_.append([None])
+    else:
+      values = random.sample(range(1, 1000), random.sample(range(1, 50),1)[0])
+      # introduce some character 
+      if i%10==0 :
+        values = [str(i) for i in values]
+      list_.append(values)
+  return list_
+
+# randomly take two values to compute the ratio 
+def calc1(values):
+  output = values[random.sample(range(1, len(values)+1),1)[0]-1]/values[random.sample(range(1, len(values)+1),1)[0]-1]
+  return output
+
+list_ = create_dirty_list(0.5)
+# Store it in a list
+results = [calc1(values) for  values in list_]
+
+```
+
+```{python,echo = T,collapse = TRUE}
+# Let's change the function
+
+def calc2(values):
+  if not any(value is None for value in values): 
+    output = values[random.sample(range(1, len(values)+1),1)[0]-1]/values[random.sample(range(1, len(values)+1),1)[0]-1]
+    return output
+
+results = [calc2(values) for values in list_]
+
+```
+
+```{python,echo = T,collapse = TRUE}
+# Let's change the function
+
+def calc3(values):
+  if not any(value is None for value in values): 
+    if all(isinstance(value,int) for value in values):
+      output = values[random.sample(range(1, len(values)+1),1)[0]-1]/values[random.sample(range(1, len(values)+1),1)[0]-1]
+      return output 
+
+results = [calc3(values) for values in list_]
+
+```
+
+```{python,echo = T,collapse = TRUE}
+# using try
+
+def calc_try(values):
+  try:
+    output = values[random.sample(range(1, len(values)+1),1)[0]-1]/values[random.sample(range(1, len(values)+1),1)[0]-1]
+  except:
+    output = None
+  return output
+    
+results = [calc_try(values) for values in list_]
+```
+
+ - Compare execution time 
+
+```{python,echo = T,collapse = TRUE}
+list_ = create_dirty_list(0.01)
+t= time.time()
+results = [calc3(values) for values in list_]
+time.time()-t
+t= time.time()
+results = [calc_try(values) for values in list_]
+time.time()-t
+
+```
+
+```{python,echo = T,collapse = TRUE}
+list_ = create_dirty_list(0.33)
+t= time.time()
+results = [calc3(values) for values in list_]
+time.time()-t
+t= time.time()
+results = [calc_try(values) for values in list_]
+time.time()-t
+
+```
+
+```{python,echo = T,collapse = TRUE}
+list_ = create_dirty_list(0.75)
+t= time.time()
+results = [calc3(values) for values in list_]
+time.time()-t
+t= time.time()
+results = [calc_try(values) for values in list_]
+time.time()-t
+
+```
+
+</div>
+</div>
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+ 
+
+**Exercise 1:** Write a function that divides two numbers and uses a try-except block to handle the case where the second number is zero.
+
+<details>
+<summary>Click here to see the solution</summary>
+```{python,echo = T, error = T, collapse = TRUE}
+def divide_numbers(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "Cannot divide by zero"
+
+result1 = divide_numbers(10, 2)
+result2 = divide_numbers(10, 0)
+print(result1)
+print(result2)
+```
+</details>  
+
+</div>
+
+# Exercises
+
+Translate R solution here into Python script
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+**Exercise 1:**
+
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+Find the sum of all the multiples of 3 or 5 below 10000.
+
+
+<div class = "r">
+
+```{r}
+# R
+
+get_sum_multiples_below1 <- function(below,multiple_1,multiple_2){
+  sum <- 0
+  for(i in 1:(below-1)){
+    if((i %% multiple_1 == 0)|(i %% multiple_2 == 0)){
+      sum <-  sum + i 
+    }
+  }
+  return(sum)
+}
+
+t <- Sys.time()
+get_sum_multiples_below1(10000,3,5)
+Sys.time() - t
+```
+
+</div>
+    
+</div>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+**Exercise 2:**
+
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+
+
+<div class = "r">
+
+```{r}
+# R
+
+nth_prime <- function(nth){
+  primes = c(1,2)
+  i = 2
+  while(length(primes)<nth){
+    i <- i+1
+    is_prime = TRUE
+    for(j in 2:(round(sqrt(i))+1)){
+      if(i%%j == 0){
+        is_prime = FALSE
+        break
+      }
+    }
+    if(is_prime == TRUE){
+      primes = c(primes,i)
+    }
+  }
+  
+  return(primes[nth])
+}
+
+t <- Sys.time()
+nth_prime(10001)
+Sys.time() - t
+```
+</div>
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+
+**Exercise 3:**
+
+You are given the following information, but you may prefer to do some research for yourself.
+
+- 1 Jan 1900 was a Monday.
+- Thirty days has September,
+    April, June and November.
+    All the rest have thirty-one,
+    Saving February alone,
+    Which has twenty-eight, rain or shine.
+    And on leap years, twenty-nine.
+- A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+
+How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+<div class = "r">
+
+```{r}
+
+get_sundays <- function(year,first_sunday){
+  
+  # Get number of days per month
+  if((year %% 100 != 0 & year%%4 == 0) | year %% 400 == 0){
+    month_length =  c(31,29,31,30,31,30,31,31,30,31,30,31)
+  } else {
+    month_length = c(31,28,31,30,31,30,31,31,30,31,30,31)
+  }
+  
+  # total number of days
+  nb_days = sum(month_length)
+  # position of the first days of the month
+  cumsum_year = cumsum(month_length)-month_length+1
+  
+  # position of all sundays
+  sundays = seq(first_sunday,nb_days,7)
+  
+  # get first sunday of the following year
+  next_sunday_position = sundays[length(sundays)] - nb_days + 7
+  
+  nb_sundays_first = length(which(sundays %in% cumsum_year))
+  
+  return(c(next_sunday_position,nb_sundays_first))
+}
+
+
+t = Sys.time()
+# Intialize with 1900, we know that the first sunday is the 7th.
+year_result = get_sundays(1900,7)
+
+
+# compute the sum for each year
+nb_sundays = 0
+for(i in seq(1901,2000)){
+  next_sunday = year_result[1]
+  year_result = get_sundays(i,next_sunday)
+  nb_sundays = nb_sundays + year_result[2]
+}
+Sys.time() - t
+
+
+# results
+nb_sundays
+``` 
+
+</div>
+
+
+</div>
+
+
+<p>&nbsp;</p>
+

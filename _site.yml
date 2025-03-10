@@ -1,0 +1,38 @@
+name: "Techniques de Programmation (Python - 3ETCS)"
+
+author:  "Pierre Pelletier"
+email: "[p.pelletier@unistra.fr]"
+navbar:
+  title: "Python"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Basics"
+      href: 2_Basics.html
+    - text: "Arrays/Vectors"
+      href: index.html#3_Arrays_Vectors.html
+    - text: "Regex"
+      href: index.html#4_Regex.html
+    - text: "Data Analysis"
+      href: index.html#6_Data_Analysis_Py.html
+    - text: "Best Pratices"
+      href: index.html#7_Best_practices.html
+    - text: "Efficient Prog"
+      href: index.html#8_Efficient_prog.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/master-ds2e/
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+    toc: true
+    number_sections: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: true
+      number_sections: true
+      toc_depth: 3
+    _disableToc: true
+    
+        
